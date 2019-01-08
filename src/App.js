@@ -9,13 +9,7 @@ class App extends Component {
     search: null
   };
 
-  componentDidMount() {
-    // loadData(
-    //   "https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000"
-    // ).then(data => {
-    //   console.log(data);
-    // });
-  }
+  componentDidMount() {}
 
   handleSearch = e => {
     this.setState({
@@ -23,11 +17,20 @@ class App extends Component {
     });
   };
 
+  onSearch = () => {
+    loadData(
+      "https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000"
+    ).then(data => {
+      let result = data.filter(d => d.keywords.includes(this.state.search));
+      console.log(result);
+    });
+  };
+
   render() {
     return (
       <div>
         <Container>
-          <Form onSubmit={() => console.log(this.state.search)}>
+          <Form onSubmit={this.onSearch}>
             <Form.Field>
               <input onChange={this.handleSearch} placeholder="Search" />
             </Form.Field>
