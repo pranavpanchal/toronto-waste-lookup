@@ -1,25 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+
+import { loadData } from "./util/myUtil";
+import { Icon, Input, Container } from "semantic-ui-react";
 
 class App extends Component {
+  state = {
+    data: null
+  };
+
+  componentDidMount() {
+    // loadData(
+    //   "https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000"
+    // ).then(data => {
+    //   console.log(data);
+    // });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Container>
+          <Input
+            style={{ width: "100%" }}
+            size="massive"
+            icon={<Icon name="search" inverted circular link />}
+            placeholder="Search..."
+          />
+        </Container>
       </div>
     );
   }
