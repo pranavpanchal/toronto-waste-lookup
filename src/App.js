@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import "./App.css";
 
 import { loadData } from "./util/myUtil";
-import { Icon, Input, Container } from "semantic-ui-react";
+import { Button, Icon, Form, Container } from "semantic-ui-react";
 
 class App extends Component {
   state = {
-    data: null
+    search: null
   };
 
   componentDidMount() {
@@ -17,16 +17,25 @@ class App extends Component {
     // });
   }
 
+  handleSearch = e => {
+    this.setState({
+      search: e.target.value
+    });
+  };
+
   render() {
     return (
       <div>
         <Container>
-          <Input
-            style={{ width: "100%" }}
-            size="massive"
-            icon={<Icon name="search" inverted circular link />}
-            placeholder="Search..."
-          />
+          <Form onSubmit={() => console.log(this.state.search)}>
+            <Form.Field>
+              <input onChange={this.handleSearch} placeholder="Search" />
+            </Form.Field>
+            <Button icon>
+              <Icon name="search" />
+            </Button>
+          </Form>
+          <div>{this.state.search}</div>
         </Container>
       </div>
     );
