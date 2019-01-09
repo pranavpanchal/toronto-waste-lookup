@@ -64,7 +64,16 @@ class Lookup extends Component {
             <Input
               onChange={this.handleSearch}
               style={styles.input}
-              icon={<Icon color="green" name="search" inverted circular link />}
+              icon={
+                <Icon
+                  onClick={this.onSearch}
+                  color="green"
+                  name="search"
+                  inverted
+                  circular
+                  link
+                />
+              }
               placeholder="Search..."
             />
           </Form>
@@ -104,7 +113,7 @@ class Lookup extends Component {
 const styles = {
   input: {
     width: "100%",
-    marginBottom: "2%",
+    marginBottom: "3%",
     fontSize: "2em"
   },
   title: {
