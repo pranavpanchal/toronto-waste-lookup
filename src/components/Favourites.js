@@ -33,7 +33,13 @@ class Favourites extends Component {
                       {item.title}
                     </p>
                   </Grid.Column>
-                  <Grid.Column>{Parser(item.body)}</Grid.Column>
+                  <Grid.Column>
+                    {" "}
+                    <p
+                      style={styles.description}
+                      dangerouslySetInnerHTML={{ __html: Parser(item.body) }}
+                    />
+                  </Grid.Column>
                 </Grid.Row>
               ))}
           </Grid>
@@ -58,6 +64,9 @@ const styles = {
   },
   icon: {
     marginRight: "3%"
+  },
+  description: {
+    fontSize: "1.2em"
   }
 };
 
