@@ -1,42 +1,55 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import { Header } from "semantic-ui-react";
+import Banner from "./components/Banner";
 import Lookup from "./components/Lookup";
+import Favourites from "./components/Favourites";
 
 class App extends Component {
   state = {
-    search: null
+    favourites: []
+  };
+
+  toggleFavourite = fav => {
+    if (JSON.stringify(this.state.favourites).includes(JSON.stringify(fav))) {
+      this.state.favourites.some(savedFav => {
+        if (savedFav.title === fav.title) {
+          var array = [...this.state.favourites]; // make a separate copy of the array
+          var index = this.state.favourites.indexOf(savedFav);
+          if (index !== -1) {
+            array.splice(index, 1);
+            this.setState({ favourites: array }, () =>
+              console.log(this.state.favourites)
+            );
+          }
+        }
+        return null;
+      });
+    } else {
+      this.setState(
+        prevState => ({
+          favourites: [...prevState.favourites, fav]
+        }),
+        () => console.log(this.state.favourites)
+      );
+    }
   };
 
   render() {
     return (
       <div>
-        <div style={styles.headerBackground}>
-          <Header style={styles.headerText} size="huge">
-            Toronto Waste Lookup
-          </Header>
-        </div>
-
-        <Lookup />
+        <Banner />
+        <Lookup
+          favourites={this.state.favourites}
+          toggleFavourite={this.toggleFavourite}
+        />
+        <Favourites
+          favourites={this.state.favourites}
+          toggleFavourite={this.toggleFavourite}
+        />
       </div>
     );
   }
 }
-
-const styles = {
-  headerBackground: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundImage: "linear-gradient(to right, #1d5994 , #22965e)",
-    height: "125px",
-    marginBottom: "3%"
-  },
-  headerText: {
-    color: "white",
-    fontSize: "3em"
-  }
-};
 
 export default App;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Input, Form, Container, Grid } from "semantic-ui-react";
+import { Input, Form, Container, Grid, Icon } from "semantic-ui-react";
 import Parser from "html-react-parser";
 
 import { loadData } from "../util/myUtil";
@@ -21,6 +21,22 @@ class Lookup extends Component {
       });
     }
   };
+
+  // addToFavourite = item => {
+  //   console.log(document.cookie);
+
+  //   if (document.cookie.charAt(0) !== "[") {
+  //     document.cookie = "[]";
+  //   }
+
+  //   console.log(document.cookie);
+
+  //   var saved = JSON.parse(document.cookie);
+  //   saved.push(item);
+  //   document.cookie = JSON.stringify(saved);
+
+  //   console.log(document.cookie);
+  // };
 
   onSearch = () => {
     loadData(
@@ -46,9 +62,9 @@ class Lookup extends Component {
         <Container>
           <Form onSubmit={this.onSearch}>
             <Input
-              style={styles.input}
               onChange={this.handleSearch}
-              action={{ icon: "search" }}
+              style={styles.input}
+              icon={<Icon color="green" name="search" inverted circular link />}
               placeholder="Search..."
             />
           </Form>
@@ -56,15 +72,21 @@ class Lookup extends Component {
             {this.state.search &&
               this.state.items &&
               this.state.items.map(item => (
-                <Grid.Row columns={2}>
+                <Grid.Row key={item.title} columns={2}>
                   <Grid.Column>
                     <p style={styles.title}>
-                      <Button
-                        onClick={() => console.log("hi")}
+                      <Icon
+                        onClick={() => this.props.toggleFavourite(item)}
                         style={styles.icon}
-                        circular
-                        icon="star"
-                        color="grey"
+                        link
+                        name="star"
+                        color={
+                          JSON.stringify(this.props.favourites).includes(
+                            JSON.stringify(item)
+                          )
+                            ? "green"
+                            : "grey"
+                        }
                       />
                       {item.title}
                     </p>
@@ -82,10 +104,11 @@ class Lookup extends Component {
 const styles = {
   input: {
     width: "100%",
-    marginBottom: "2%"
+    marginBottom: "2%",
+    fontSize: "2em"
   },
   title: {
-    fontSize: "1.5em"
+    fontSize: "1.4em"
   },
   icon: {
     marginRight: "3%"
