@@ -38,10 +38,12 @@ class App extends Component {
           favourites={this.state.favourites}
           toggleFavourite={this.toggleFavourite}
         />
-        <Favourites
-          favourites={this.state.favourites}
-          toggleFavourite={this.toggleFavourite}
-        />
+        {this.state.favourites.length !== 0 && (
+          <Favourites
+            favourites={this.state.favourites}
+            toggleFavourite={this.toggleFavourite}
+          />
+        )}
       </div>
     );
   }
