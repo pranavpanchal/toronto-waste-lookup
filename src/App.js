@@ -18,20 +18,15 @@ class App extends Component {
           var index = this.state.favourites.indexOf(savedFav);
           if (index !== -1) {
             array.splice(index, 1);
-            this.setState({ favourites: array }, () =>
-              console.log(this.state.favourites)
-            );
+            this.setState({ favourites: array });
           }
         }
         return null;
       });
     } else {
-      this.setState(
-        prevState => ({
-          favourites: [...prevState.favourites, fav]
-        }),
-        () => console.log(this.state.favourites)
-      );
+      this.setState(prevState => ({
+        favourites: [...prevState.favourites, fav]
+      }));
     }
   };
 

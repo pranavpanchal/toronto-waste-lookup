@@ -22,22 +22,6 @@ class Lookup extends Component {
     }
   };
 
-  // addToFavourite = item => {
-  //   console.log(document.cookie);
-
-  //   if (document.cookie.charAt(0) !== "[") {
-  //     document.cookie = "[]";
-  //   }
-
-  //   console.log(document.cookie);
-
-  //   var saved = JSON.parse(document.cookie);
-  //   saved.push(item);
-  //   document.cookie = JSON.stringify(saved);
-
-  //   console.log(document.cookie);
-  // };
-
   onSearch = () => {
     loadData(
       "https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000"
@@ -51,8 +35,6 @@ class Lookup extends Component {
       this.setState({
         items: result
       });
-
-      console.log(this.state.items);
     });
   };
 
